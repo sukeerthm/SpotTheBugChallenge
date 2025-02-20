@@ -1,0 +1,36 @@
+{
+    
+  "userDetailsFromJson": [
+    { "firstname": "Marry", 
+      "lastname": "Clar" ,
+      "phonenumber":"02000000",
+      "emailaddress":"marryclar0987676@test.com",
+      "password":"Test123" 
+    },
+    { 
+      "forename": "John", 
+      "surename": "Brad" ,
+      "phonenumber":"021111111",
+      "emailaddress":"johnbrad986756546@test.com",
+      "password":"Test098" 
+    },
+    { "forename": "Adobe", 
+      "surename": "Park" ,
+      "phonenumber":"022222222",
+      "emailaddress":"adobepark4355634@test.com",
+      "password":"Test346" 
+    },
+    { "forename": "Jerry", 
+      "surename": "Berry" ,
+      "phonenumber":"0233333333",
+      "emailaddress":"jerryberry876756@test.com",
+      "password":"Test409" 
+    },
+    { "forename": "Kill", 
+      "surename": "Bill" ,
+      "phonenumber":"0244444444",
+      "emailaddress":"fillbill098986765@test.com",
+      "password":"Test956" 
+    } 
+ ]
+ }

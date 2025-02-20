@@ -1,0 +1,11 @@
+{
+    
+  "userDetailsFromJson": [
+    { "firstname": "Marry", 
+      "lastname": "Clar" ,
+      "phonenumber":"1234567890",
+      "emailaddress":"marryclar0987676@test.com",
+      "password":"Test123" 
+    }
+  ] 
+  }

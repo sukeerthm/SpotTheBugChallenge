@@ -1,5 +1,4 @@
 import { expect, type Locator, type Page } from '@playwright/test';
-import { mandatoryFields} from '../implementation/formMandatoryFields';
 
 //Class to capture all the locator details realted to CONTACT page
 export abstract class regstrationTab {
@@ -10,7 +9,8 @@ export abstract class regstrationTab {
   readonly lastName: Locator;
   readonly emailAddress : Locator;
   readonly phoneNumber: Locator;
-  readonly country : Locator;
+  readonly countryList : Locator;
+  readonly countryListOptions : Locator;
   readonly password : Locator;
   readonly termsAndCondition : Locator;
   readonly registerButton : Locator;
@@ -31,11 +31,7 @@ export abstract class regstrationTab {
   //Page Titles and Messages
   readonly header_text = "CHALLENGE - Spot the BUGS!";
   readonly successfulMessage_text = "Successfully registered the following information";
-  readonly lastName_expectedError = "The last name is madatory";
-  readonly phoneNumber_expectedError = "The phone number is madatory";
-  readonly emailAddress_expectedError = "The eamil address is madatory";
-  readonly password_expectedError = "The password is madatory";
-  readonly phone_length_error_text = "The phone number should contain at least 10 characters!";
+   readonly phone_length_error_text = "The phone number should contain at least 10 characters!";
   readonly password_length_error_text = "The password should contain between [6,20] characters!";
   
 
@@ -48,7 +44,8 @@ export abstract class regstrationTab {
     this.lastName = page.getByPlaceholder('Enter last name');
     this.phoneNumber = page.getByPlaceholder('Enter phone number');
     this.emailAddress = page.getByPlaceholder('Enter email');
-   // this.country = page.getByPlaceholder('Tell us about it..');
+    this.countryList = page.locator('#countries_dropdown_menu');
+    this.countryListOptions = page.locator("//select[@id='countries_dropdown_menu']/option");
     this.password = page.getByPlaceholder('Password');
     this.termsAndCondition = page.locator('#exampleCheck1');
     this.registerButton = page.getByRole('button', { name: 'Register' });

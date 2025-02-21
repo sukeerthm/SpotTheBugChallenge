@@ -14,32 +14,29 @@ export class registrationForm extends regstrationTab {
 
       //Fill the form with Test Data from JSON file
       async fillTheFormUsingJsonData(json: Record<string, any>) {
-        console.log(json)
         await this.enterFirstname(json.firstname);
         await this.enterLastname(json.lastname);
         await this.enterPhone(json.phonenumber);
+        await this.countryList.selectOption(json.countryname);
         await this.enterEmail(json.emailaddress);
         await this.enterPassword(json.password);
       }
 
-    //   async skipTheSpecificField(fieldToSkip : string) {
-    //     if(!fieldToSkip.match('FirstName')) {
-    //         await this.enterFirstname(faker.person.firstName());
-    //     }
-    //     else if(!fieldToSkip.match('lastName')) {
-    //         await this.enterLastname(faker.person.lastName());
-    //     }
-    //     else if(!fieldToSkip.match('emailAddress')){
-    //         await this.enterEmail(faker.internet.email());
-    //     }
-    //     else if(!fieldToSkip.match('phoneNumber')){
-    //         await this.enterPhone(faker.helpers.fromRegExp('02[0-9]{10}'));
-    //     }
-    //     else if(!fieldToSkip.match('password')) {
-    //         await this.enterPassword(faker.internet.password({length:10}));
-    //     }
-    //   }
+      async validateUserCanSelectAnyCountry(countryName : string) {
+          await this.enterFirstname(faker.person.firstName());
+          await this.enterLastname(faker.person.lastName());
+          await this.enterEmail(faker.internet.email())
+          await this.enterPhone(faker.helpers.fromRegExp('02[0-9]{10}'));
+          await this.enterPassword(faker.internet.password({length:10}));
+          await this.countryList.selectOption(countryName);
+        }
     
+        async getCountryCount() : Promise<number>{
+          await this.countryList.click();
+        return await this.countryListOptions.count();
+        
+        }
+           
       //Validate Error Messages for each field on the form
 
       async acceptTermsAndConditions(){
@@ -75,6 +72,11 @@ export class registrationForm extends regstrationTab {
         return actualPhoneNum[1].trim();
        }
 
+       async getCountryResults() : Promise<string>{
+        const actualCountryName: string[] = (await this.resultCountry.innerText()).split(':');
+        return actualCountryName[1].trim();
+       }
+
        async getFirstNameInputValue() : Promise<string>{
         return await this.firstName.inputValue()
        }
@@ -91,8 +93,24 @@ export class registrationForm extends regstrationTab {
         return await this.phoneNumber.inputValue()
        }
 
-    //    async getCountryResults() {
-    //     const result: string[] = (await this.resultFirstName.innerText()).split(':');
-    //     console.log(result)
-    //    }
+       async getCountryToSelect(index : number): Promise<string>{
+        return await this.countryListOptions.nth(index).innerText();
+       }
+
+
+       async getErrorMessage(fieldName : string): Promise<Locator>{
+
+        let isErrorVisible; 
+        if(fieldName == 'phonenumber'){
+
+          isErrorVisible = this.page.getByText(this.phone_length_error_text);
+
+        } else if (fieldName == 'password'){
+
+          isErrorVisible = this.page.getByText(this.password_length_error_text);
+        }
+        
+        return await isErrorVisible;
+       }
+
 }
